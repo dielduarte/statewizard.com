@@ -5,23 +5,49 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 export default function Home() {
-  const [email, setEmail] = useState("")
-  const [error, setError] = useState("")
+  const [error, setError] = useState({
+    email: "",
+    firstName: ""
+  })
 
   const validateEmail = (email: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return regex.test(email)
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address")
+    const formData = new FormData(e.target as HTMLFormElement);
+    const email = formData.get('email') as string;
+    const firstName = formData.get('firstName') as string;
+
+    if (!firstName) {
+      setError({
+        email: "",
+        firstName: "Please enter a valid first name"
+      })
       return
     }
-    setError("")
+
+    if (!validateEmail(email)) {
+      setError({
+        email: "Please enter a valid email address",
+        firstName: ""
+      })
+      return
+    }
+
+    setError({
+      email: "",
+      firstName: ""
+    })
     // Handle successful submission
-    console.log("Email submitted:", email)
+    console.log("Email submitted:", email, firstName)
+    // send a post call to api/send
+    await fetch("/api/send", {
+      method: "POST",
+      body: JSON.stringify({ email, firstName })
+    })
   }
 
   return (
@@ -40,19 +66,27 @@ export default function Home() {
         <form onSubmit={handleSubmit} className="mx-auto max-w-md space-y-4">
           <div className="relative">
             <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+              type="text"
+              placeholder="Enter your name"
+              name="firstName"
               className="h-12 bg-gray-800/50 text-white placeholder:text-gray-400"
             />
-            {error && <p className="mt-2 text-left text-sm text-red-400">{error}</p>}
+            {error.firstName && <p className="mt-2 text-left text-sm text-red-400">{error.firstName}</p>}
+          </div>
+          <div className="relative">
+            <Input
+              type="email"
+              placeholder="Enter your email"
+              name="email"
+              className="h-12 bg-gray-800/50 text-white placeholder:text-gray-400"
+            />
+            {error.email && <p className="mt-2 text-left text-sm text-red-400">{error.email}</p>}
           </div>
           <Button
             type="submit"
             className="h-12 w-full bg-gradient-to-r from-[#E9B98E] to-[#E9A1A1] text-black hover:opacity-90"
           >
-            Get Started
+            Sign me up
           </Button>
         </form>
 
