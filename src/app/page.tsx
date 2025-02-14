@@ -11,7 +11,7 @@ export default function Home() {
   }
 
    const [error, submitAction, isPending] = useActionState(
-    async (_, formData: FormData) => {
+    async (_: unknown, formData: FormData) => {
       const email = formData.get('email') as string;
       const firstName = formData.get('firstName') as string;
 
