@@ -39,13 +39,16 @@ export default function Home() {
         return {
           email: "",
           firstName: "",
-          apiError: "Something went wrong"
+          apiMessage: "Sorry! we can&apos;t sign you up right now.",
+          apiError: true
         }
       }
 
       return {
         email: "",
-        firstName: ""
+        firstName: "",
+        apiMessage: "Thank you! you will hear from us soon :)",
+        apiError: false
       };
     },
     null,
@@ -64,8 +67,8 @@ export default function Home() {
           faster and smarter!
         </p>
 
-      {error?.apiError 
-        ? <p className="mt-2 mx-auto text-center text-sm text-red-400">Sorry! we can&apos;t sign you up right now.</p>
+      {error?.apiMessage 
+        ? <p className={`mt-2 mx-auto text-center text-sm ${error?.apiError ? 'text-red-400' : 'text-emerald-400'}`}>{error.apiMessage}</p>
         : (
             <form action={submitAction} className="mx-auto max-w-md space-y-4">
               <div className="relative">
