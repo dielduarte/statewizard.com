@@ -18,13 +18,13 @@ export default function Home() {
       if (!firstName) {
         return {
           email: "",
-          firstName: "Please enter a valid first name"
+          firstName: "Por favor, insira um nome válido"
         }
       }
 
       if (!validateEmail(email)) {
         return {
-          email: "Please enter a valid email address",
+          email: "Por favor, insira um e-mail válido",
           firstName: ""
         }
       }
@@ -39,7 +39,7 @@ export default function Home() {
         return {
           email: "",
           firstName: "",
-          apiMessage: "Sorry! we can&apos;t sign you up right now.",
+          apiMessage: "Desculpe! Não conseguimos te inscrever no momento.",
           apiError: true
         }
       }
@@ -47,7 +47,7 @@ export default function Home() {
       return {
         email: "",
         firstName: "",
-        apiMessage: "Thank you! you will hear from us soon :)",
+        apiMessage: "Obrigado! Por favor, confirme seu e-mail clicando no link de confirmação. :)",
         apiError: false
       };
     },
