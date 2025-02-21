@@ -3,7 +3,7 @@
 import { useActionState } from "react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-
+import Image from "next/image"
 export default function Home() {
   const validateEmail = (email: string) => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -56,15 +56,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <div className="mx-auto max-w-4xl px-4 py-20 text-center">
-        <h1 className="mb-6 text-5xl font-bold leading-tight md:text-6xl">
-          <span className="bg-gradient-to-r from-[#E9B98E] via-[#E9A1A1] to-[#B784C4] bg-clip-text text-transparent">
-            Ai video editing, reimagined.
-          </span>
-        </h1>
+      <div className="mx-auto max-w-4xl px-4 py-8 text-center">
+        <Image src="/logo.png" className="mx-auto w-80" width={500} height={500} alt="state wizard logo" />
+        <p className="mb-4 text-lg text-gray-400">
+         Cansado de lidar com estados complexos do jeito tradicional? As state machines vão mudar o jogo, trazendo mais clareza, previsibilidade e estabilidade para suas aplicações!
+        </p>
         <p className="mb-12 text-lg text-gray-400">
-          Create stunning videos effortlessly—AI-powered editing at your fingertips and voice. Launch your content
-          faster and smarter!
+          O State Wizard é um curso gratuito por e-mail, projetado para te ensinar, de forma prática e eficiente, como lidar com estados complexos de forma simples e eficiente. 🚀<br />Não enviaremos spam.
         </p>
 
       {error?.apiMessage 
@@ -74,7 +72,7 @@ export default function Home() {
               <div className="relative">
                 <Input
                   type="text"
-                  placeholder="Enter your name"
+                  placeholder="Nome"
                   name="firstName"
                   className="h-12 bg-gray-800/50 text-white placeholder:text-gray-400"
                 />
@@ -83,7 +81,7 @@ export default function Home() {
               <div className="relative">
                 <Input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="E-mail"
                   name="email"
                   className="h-12 bg-gray-800/50 text-white placeholder:text-gray-400"
                 />
@@ -91,19 +89,13 @@ export default function Home() {
               </div>
               <Button
                 type="submit"
-                className="h-12 w-full bg-gradient-to-r from-[#E9B98E] to-[#E9A1A1] text-black hover:opacity-90"
+                className="h-12 w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white hover:opacity-90"
                 disabled={isPending}
               >
-                {isPending ? "Saving..." : "Sign me up"}
+                {isPending ? "Salvando..." : "Quero receber o curso via email"}
               </Button>
             </form>
           )}
-
-        <div className="mt-20 overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-900 via-teal-900 to-slate-900">
-          <div className="px-8 py-20 text-center">
-            <h2 className="text-4xl font-bold text-white md:text-5xl">Ready to Transform Your Workflow?</h2>
-          </div>
-        </div>
       </div>
     </div>
   )
