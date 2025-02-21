@@ -28,7 +28,7 @@ export async function POST(req: Request) {
         to: [email],
         subject: 'State Wizard - confirme seu e-mail',
         react: EmailTemplate({ userId: data.id }),
-      }).then(console.log);
+      })
     }
 
     return Response.json(data);
