@@ -2,8 +2,8 @@
 
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
-import { useEffect } from "react"
-export default function Subscribe() {
+import { useEffect, Suspense } from "react"
+function Subscribe() {
   const searchParams = useSearchParams()
  
   const id = searchParams.get('id')
@@ -26,6 +26,13 @@ export default function Subscribe() {
         </p>
       </div>
     </div>
+  )
+}
+export default function SubscribePage() {
+  return (
+    <Suspense>
+      <Subscribe />
+    </Suspense>
   )
 }
 
